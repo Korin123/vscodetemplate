@@ -1,0 +1,26 @@
+{
+  "name": "test-template",
+  "image": "korin/devcontainer-base-arm:1.0",
+  "runArgs": ["--platform=linux/arm64"],
+  "remoteUser": "vscode",
+
+  "postCreateCommand": "uv venv .venv && . .venv/bin/activate && if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi && if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt; fi",
+
+  "postStartCommand": "git config --global --add safe.directory /workspaces/test-template || true && pre-commit install || true",
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/workspaces/${localWorkspaceFolderBasename}/.venv/bin/python"
+      },
+      "extensions": [
+        "ms-vscode-remote.remote-containers",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "github.copilot",
+        "continue.continue"
+      ]
+    }
+  }
+}
