@@ -1,17 +1,17 @@
 {
   "name": "test-template",
-  "image": "korin/devcontainer-base-arm:1.0",
+  "image": "ghcr.io/korin123/devcontainer-base-arm:1.1",
   "runArgs": ["--platform=linux/arm64"],
   "remoteUser": "vscode",
 
-  "postCreateCommand": "uv venv .venv && . .venv/bin/activate && if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi && if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt; fi",
+  "postCreateCommand": "bash -lc 'uv venv .venv && source .venv/bin/activate && if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi && if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt; fi'",
 
-  "postStartCommand": "git config --global --add safe.directory /workspaces/test-template || true && pre-commit install || true",
+  "postStartCommand": "bash -lc 'git config --global --add safe.directory ${containerWorkspaceFolder} || true; pre-commit install || true'",
 
   "customizations": {
     "vscode": {
       "settings": {
-        "python.defaultInterpreterPath": "/workspaces/${localWorkspaceFolderBasename}/.venv/bin/python"
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python"
       },
       "extensions": [
         "ms-vscode-remote.remote-containers",
