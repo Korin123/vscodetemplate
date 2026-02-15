@@ -1,6 +1,6 @@
 {
   "name": "test-template",
-  "image": "ghcr.io/korin123/devcontainer-base-arm:1.1",
+  "image": "ghcr.io/korin123/devcontainer-base-arm:release",
   "runArgs": ["--platform=linux/arm64"],
   "remoteUser": "vscode",
 
