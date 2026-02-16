@@ -1,11 +1,9 @@
 {
   "name": "test-template",
-  "image": "ghcr.io/korin123/devcontainer-base-arm:release",
-  "runArgs": ["--platform=linux/arm64"],
+  "image": "ghcr.io/korin123/devcontainer-base:release",
   "remoteUser": "vscode",
 
   "postCreateCommand": "bash -lc 'uv venv .venv && source .venv/bin/activate && if [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi && if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt; fi'",
-
   "postStartCommand": "bash -lc 'git config --global --add safe.directory ${containerWorkspaceFolder} || true; pre-commit install || true'",
 
   "customizations": {
